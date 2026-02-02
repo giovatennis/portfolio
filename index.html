@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanni Bellio | CS Educator & Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF4F17;
+            --secondary: #1A1A2E;
+            --accent: #0F3460;
+            --light: #F7F7F7;
+            --dark: #0A0A0A;
+            --gradient: linear-gradient(135deg, #FF4F17 0%, #FF8C42 100%);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--secondary);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-btn {
+            padding: 0.75rem 1.75rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 79, 23, 0.3);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 79, 23, 0.4);
+        }
+        
+        .cta-btn::after {
+            display: none;
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #F7F7F7 0%, #FFFFFF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 79, 23, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, -30px) scale(1.05); }
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            text-align: center;
+            grid-template-columns: 15fr 15fr;
+            gap: 4.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding-left: 400px;
+        }
+        
+        .hero-text h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            letter-spacing: -2px;
+        }
+        
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+            font-weight: 500;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-tag {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #555;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .interest-tag {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #FF4F17 0%, #FF8C42 100%);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(255, 79, 23, 0.2);
+        }
+        
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        #resume_card{
+            margin-left:400px;
+            margin-top: 100px;
+        }
+        
+        .research-card {
+            background: white;
+            width:600px;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            
+        }
+        
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .research-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .research-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .research-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .download-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            padding-left: 180px;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            gap: 3rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        #project_card{
+             background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            padding-right:0px;
+            
+        }
+        
+        .project-card:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+        
+        .project-card:nth-child(even) .project-content {
+            direction: ltr;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .project-media {
+            position: relative;
+            overflow: hidden;
+            background: var(--secondary);
+        }
+        
+        .project-media img,
+        .project-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-media img,
+        .project-card:hover .project-media video {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 79, 23, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+        
+        .project-content h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .project-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 30px;
+            margin: 4rem auto;
+            padding: 5rem 4rem;
+            text-align: center;
+        }
+        
+        #contact .section-tag {
+            color: var(--primary);
+        }
+        
+        #contact .section-title {
+            color: white;
+        }
+        
+        #contact .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+        
+          /* Slider placeholder */
+  
+  /* Container */
+
+.slider-placeholder {
+  width: 670px;
+  height: 400px;
+  background: rgba(255,255,255,0.22);
+  border: 2px dashed rgba(255,255,255,0.5);
+  border-radius: 10px;
+  position:relative;
+overflow: hidden;
+  display: flex;
+align-items: center;
+  justify-content: center;
+    
+    
+}
+
+/* Slides */
+  
+  .slider-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left:0;
+  right:0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 10px;
+}
+
+.slider-image.slide-active {
+  opacity: 1;
+}
+
+.slider-dots span.dot-active {
+  background: rgba(255,255,255,0.95);
+}
+.slider-dots span.active-dot {
+  background: rgba(255,255,255,0.95);
+  }
+
+/* Dots */
+.slider-dots {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  gap: 0.45rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.slider-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+        
+        
+        
+        
+        
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--dark);
+            color: white;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 3rem 2rem;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content,
+            .project-card,
+            .project-card:nth-child(even) {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .project-content {
+                padding: 2rem;
+            }
+            
+            #contact {
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">My Portfolio<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Teaching</a></li>
+                <li><a href="#contact" class="cta-btn">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hello! I'm <span>Giovanni Bellio</span></h1>
+                <p>CS Lecturer | PhD Candidate at Auburn University</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Teaching</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Publications</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">PhD</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <div class="section-tag">Get to Know Me</div>
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">Passionate educator and researcher dedicated to improving computer science education through innovative game-based learning approaches</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Nice to meet you! I have been teaching as a <strong>lecturer of Computer Science</strong> for the past few years, and have got to learn a lot along the way!</p>
+                
+                <p>I am currently pursuing my <strong>Ph.D. at Auburn University</strong>, where my research focuses on improving CS students' computational thinking through game-based techniques.</p>
+                
+                <p>My approach combines academic research with practical teaching experience, creating engaging learning environments that help students develop strong computational thinking skills.</p>
+                <div class="section-tag">
+                <p><strong>My Interests</strong></p>
+                </div>
+                <div class="interests">
+                    
+                    <span class="interest-tag">🎾 Tennis</span>
+                    <span class="interest-tag">⚽ Soccer</span>
+                    <span class="interest-tag">🎵 Music</span>
+                    <span class="interest-tag">🎮 Game Development</span>
+                    <span class="interest-tag">🤖 Machine Learning</span>
+                    <span class="interest-tag">📚 Education</span>
+                    
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/teaching.jpeg" alt="Giovanni teaching">
+            </div>
+           </div>
+                <div class="research-card" id=resume_card>
+                    <h3>My Education</h3>
+                    <p><strong>PhD Candidate</strong> - Auburn University<br>Focus: Computational Thinking & Game-Based Learning</p>
+                    <p><strong>Master's Degree</strong> - Auburn University at Montgomery<br>Published 2 Machine Learning research papers</p>
+                    <div class="download-links">
+                        <a href="./docs/resume.pdf" class="download-btn" download>📄 Download Resume</a>
+                    </div>
+                </div>
+            
+        
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="section-header">
+            <div class="section-tag">My Work</div>
+            <h2 class="section-title">Research & Publications</h2>
+            <p class="section-subtitle">Exploring the intersection of computer science education, game development, and machine learning</p>
+        </div>
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="research-icon">🎓</div>
+                <h3>Master's Research</h3>
+                <p>Developed and published two research papers: one proposing a categorical boosting-based machine learning algorithm for film rating prediction, and another focused on pixel classification in hyperspectral imagery.</p>
+                <div class="download-links">
+                    <a href="./docs/master_thesis.pdf" class="download-btn" download>📚 Master's Thesis</a>
+                    <a href="./docs/publication_IEEE.pdf" class="download-btn" download>📰 IEEE Conference Paper</a>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="research-icon">🎮</div>
+                <h3>PhD Dissertation</h3>
+                <p>Developing a computational thinking framework specifically designed for introductory CS courses. Through a serious game, it seeks to strengthen students' understanding and targets common programming 
+                    misconceptions through an engaging, immersive, fun environment. Currently still on development, although a preliminary version of the work is available!</p>
+                <div class="download-links">
+                    <a href="./docs/prelim_thesis.pdf" class="download-btn" download>📖 Prelim PhD Thesis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects/Teaching Section -->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-tag">Teaching Excellence</div>
+            <h2 class="section-title">Courses & Student Work</h2>
+            <p class="section-subtitle">Project-based learning that empowers students to create amazing things</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-media">
+                    <video autoplay loop muted playsinline>
+                        <source src="./images/student_demo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="project-content">
+                    <span class="project-tag">Game Development Course</span>
+                    <h3>Student Project Demo</h3>
+                    <p>A game where the player must rescue 10 animals from a burning village being attacked by drones. Rescue them before time runs up!</p>
+                    <a href="https://www.youtube.com/@gbellior/playlists" class="download-btn"> 🖥️ &nbsp;Full Course Available on YouTube</a>
+                </div>
+            </div>
+            
+            <div id="project_card">
+                
+                
+                     
+              <div class="slider-placeholder" id="imageSlider">
+                <!-- Slides -->
+                <img src="./images/cs_department.png" class="slider-image slide-active" alt="Slide 1">
+                <img src="./images/halloween_store.png" class="slider-image" alt="Slide 2">
+
+                <!-- Dots -->
+                <div class="slider-dots">
+                  <span class="dot-active"></span>
+                  <span></span>
+                </div>
+              </div>
+                
+                <div class="project-content">
+                    <span class="project-tag">Web Development & 3D Modeling Courses</span>
+                    <h3>Student Projects</h3>
+                    <p>Web interface development using HTML, CSS, and JavaScript. <br>3D object modeling and design using Blender software.</p>
+                </div>
+                 
+            </div>
+        </div>
+      
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <div class="section-tag">Let's Connect</div>
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Interested in collaboration, research, or just want to chat about CS education?<br> I'd love to hear from you!</p>
+        </div>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-icon">📧</span>
+                <span>Email me for inquiries</span>
+            </div>
+       
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Giovanni Bellio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll with offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.getElementById('imageSlider');
+  const images = slider.querySelectorAll('.slider-image');
+  const dots = slider.querySelectorAll('.slider-dots span');
+  let current = 0;
+
+  // Initialize slider
+  function initSlider() {
+    images.forEach(img => img.classList.remove('slide-active'));
+    dots.forEach(dot => dot.classList.remove('dot-active'));
+    images[0].classList.add('slide-active');
+    dots[0].classList.add('dot-active');
+  }
+
+  initSlider();
+
+  // Show a specific slide
+  function showSlide(index) {
+    images.forEach((img, i) => img.classList.toggle('slide-active', i === index));
+    dots.forEach((dot, i) => dot.classList.toggle('dot-active', i === index));
+    current = index;
+  }
+
+  // Auto-slide every 3 seconds
+  let slideInterval = setInterval(() => {
+    let next = (current + 1) % images.length;
+    showSlide(next);
+  }, 3000);
+
+  // Dot navigation
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      showSlide(i);
+
+      // Reset auto-slide interval after manual click
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        let next = (current + 1) % images.length;
+        showSlide(next);
+      }, 3000);
+    });
+  });
+});
+    </script>
+</body>
+</html>
